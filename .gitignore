@@ -348,3 +348,14 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/1lab/ReplaceProject/test_input_output/input.txt
+/1lab/ReplaceProject/test_input_output/ma_input.txt
+/1lab/ReplaceProject/test_input_output/ma_output.txt
+/1lab/ReplaceProject/test_input_output/output.txt
+/1lab/ReplaceProject/test_input_output/empty.txt
+/1lab/ReplaceProject/test_input_output/g_input.txt
+/1lab/ReplaceProject/test_input_output/g_output.txt
+/1lab/ReplaceProject/test_input_output/123_output.txt
+/1lab/ReplaceProject/test_input_output/123_input.txt
+/1lab/ReplaceProject/test_input_output/123_output.txt
+/1lab/ReplaceProject/test_input_output/123_input.txt
