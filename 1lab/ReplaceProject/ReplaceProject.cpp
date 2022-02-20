@@ -3,7 +3,6 @@
 #include <string>
 #include <optional>
 // Нужно сделать тесты
-// Нужно добавить парсинг входных параметров
 // Нужно вывести работу с файлами в отдельное
 
 struct Args
@@ -35,16 +34,23 @@ std::string ReplaceString(const std::string& subject,
 	std::string result;
 	while (pos < subject.length())
 	{
-		size_t foundPos = subject.find(searchString, pos);
-		result.append(subject, pos, foundPos - pos);
-		if (foundPos != std::string::npos)
+		if (searchString.length() != 0)
 		{
-			result.append(replacementString);
-			pos = foundPos + searchString.length();
+			size_t foundPos = subject.find(searchString, pos);
+			result.append(subject, pos, foundPos - pos);
+			if (foundPos != std::string::npos)
+			{
+				result.append(replacementString);
+				pos = foundPos + searchString.length();
+			}
+			else
+			{
+				break;
+		    }
 		}
 		else
 		{
-			break;
+			return subject;
 		}
 	}
 	return result;
