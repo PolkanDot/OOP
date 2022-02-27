@@ -32,6 +32,7 @@ FC.exe test_input_output\g_input.txt "%TEMP%\output.txt" > nul
 if ERRORLEVEL 1 GOTO error
 ECHO Test 4 successful
 
+
 REM Work with empty findingString
 %program% test_input_output\g_input.txt "%TEMP%\output.txt" "" b
 if ERRORLEVEL 1 GOTO error
