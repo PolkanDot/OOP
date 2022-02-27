@@ -2,9 +2,8 @@
 #include <fstream>
 #include <string>
 #include <optional>
-// Нужно сделать тесты
-// Нужно вывести работу с файлами в отдельное
-
+// подумать почему не использую метод реплэйс
+// исправить проверку на пустую строку, почему проверка на каждой строке
 struct Args
 {
 	std::string inputFileName;
@@ -13,10 +12,14 @@ struct Args
 	std::string insertString;
 };
 
-std::optional<Args> ParsArguments(int argc, char* argv[])
+// Функция парсинга входящих параметров
+// с проверкой на правильное их количество
+std::optional<Args> ParseArguments(int argc, char* argv[])
 {
 	if (argc != 5)
 	{
+		std::cout << "Invalid argument count\n"
+			<< "Usage: replace.exe <inputFile> <outputFile> <searchString> <replacementString>\n";
 		return std::nullopt;
 	}
 	Args args;
@@ -27,6 +30,7 @@ std::optional<Args> ParsArguments(int argc, char* argv[])
 	return args;
 }
 
+// Функция замены во входящей строке всех искомых подстрок на соответствующие
 std::string ReplaceString(const std::string& subject,
 	const std::string& searchString, const std::string& replacementString)
 {
@@ -34,28 +38,21 @@ std::string ReplaceString(const std::string& subject,
 	std::string result;
 	while (pos < subject.length())
 	{
-		if (searchString.length() != 0)
+		size_t foundPos = subject.find(searchString, pos);
+		result.append(subject, pos, foundPos - pos);
+		if (foundPos == std::string::npos)
 		{
-			size_t foundPos = subject.find(searchString, pos);
-			result.append(subject, pos, foundPos - pos);
-			if (foundPos != std::string::npos)
-			{
-				result.append(replacementString);
-				pos = foundPos + searchString.length();
-			}
-			else
-			{
-				break;
-		    }
+			break;
 		}
-		else
-		{
-			return subject;
-		}
+		result.append(replacementString);
+		pos = foundPos + searchString.length();
+		
 	}
 	return result;
 }
 
+// Функция для построчного прохода входного файла
+// с записью уже измененных строк в выходной файл
 void CopyFileWithReplace(std::istream& input, std::ostream& output,
 	const std::string& searchString, const std::string& replacementString)
 {
@@ -67,25 +64,56 @@ void CopyFileWithReplace(std::istream& input, std::ostream& output,
 	}
 }
 
+void CopyFile(std::istream& input, std::ostream& output)
+{
+	std::string line;
+
+	while (std::getline(input, line))
+	{
+		output << line << "\n";
+	}
+}
+
 int main(int argc, char* argv[])
 {
-	auto args = ParsArguments(argc, argv);
 
-	if (!args)
+	auto args = ParseArguments(argc, argv);
+
+	if (!args) // вынести в функцию ParseArguments
 	{
-		std::cout << "Invalid argument count\n"
-			<< "Usage: replace.exe <inputFile> <outputFile> <searchString> <replacementString>\n";
 		return 1;
 	}
 
 	std::ifstream inputFile;
 	inputFile.open(args->inputFileName);
 
+	if (!inputFile.is_open())
+	{
+		std::cout << "Failed to open " << args->inputFileName << " for reading\n";
+		return 1;
+	}
+
 	std::ofstream outputFile;
 	outputFile.open(args->outputFileName);
 
-	CopyFileWithReplace(inputFile, outputFile, args->findingString, args->insertString);
-	outputFile.flush();
+	if (!outputFile.is_open())
+	{
+		std::cout << "Failed to open " << args->inputFileName << " for writing\n";
+		return 1;
+	}
 
+	if (args->findingString.length() != 0)
+	{
+		CopyFileWithReplace(inputFile, outputFile, args->findingString, args->insertString);
+	}
+	else
+	{
+		CopyFile(inputFile, outputFile);
+	}
+	if (!outputFile.flush()) // Если не удалось сбросить данные на диск
+	{
+		std::cout << "Failed to save data on disk\n";
+		return 1;
+	}
 	return 0;
 }
