@@ -359,3 +359,5 @@ MigrationBackup/
 /1lab/ReplaceProject/test_input_output/123_input.txt
 /1lab/ReplaceProject/test_input_output/123_output.txt
 /1lab/ReplaceProject/test_input_output/123_input.txt
+/1lab/ReplaceProject/test_input_output/big_input.txt
+/1lab/ReplaceProject/test_input_output/*.txt
