@@ -2,8 +2,7 @@
 #include <fstream>
 #include <string>
 #include <optional>
-// подумать почему не использую метод реплэйс
-// исправить проверку на пустую строку, почему проверка на каждой строке
+
 struct Args
 {
 	std::string inputFileName;
@@ -64,6 +63,7 @@ void CopyFileWithReplace(std::istream& input, std::ostream& output,
 	}
 }
 
+// Функция копирования текста из входного файла в выходной
 void CopyFile(std::istream& input, std::ostream& output)
 {
 	std::string line;
@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 
 	auto args = ParseArguments(argc, argv);
 
-	if (!args) // вынести в функцию ParseArguments
+	if (!args) 
 	{
 		return 1;
 	}
