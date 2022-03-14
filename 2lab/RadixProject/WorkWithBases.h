@@ -79,7 +79,7 @@ std::string IntToString(int n, int base)
 			if (x >= 0 && x <= 9)
 				result += ('0' + x);
 			else
-				result += ('A' + (x - 10));//?
+				result += ('A' + (x - 10));
 		}
 		std::reverse(result.begin(), result.end());
 	}
@@ -109,7 +109,7 @@ int StringToInt(const std::string& str, int base)
 
 	int result{};
 	int power = str.length() - 1;
-	int i{};
+	size_t i{};
 
 	if (str[0] == '-')
 	{
