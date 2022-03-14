@@ -7,8 +7,6 @@ using std::cin;
 using std::endl;
 using std::string;
 
-// В консоль выводить успешные тесты с описанием проверки
-// Все текстовые сообщения выводить в константы
 // Сколько разных тестов нужно написать?
 
 const string IncorrectParametersNumber = "Expected 3 arguments\nArguments: <source notation> <destination notation> <value>";
