@@ -1,10 +1,10 @@
-#pragma once
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <optional>
 #include <vector>
 #include <algorithm>
+#include <iomanip>
 
 using std::cout;
 using std::cin;
@@ -12,20 +12,18 @@ using std::endl;
 using std::string;
 using std::vector;
 
-vector<float> ReadingVector(std::ifstream& input)
+struct ExtremeElements
 {
-	vector<float> PrimaryVector;
-	float number;
+	double Min;
+	double Max;
+};
 
-	while (!input.eof()) {
-		input >> number;
-		PrimaryVector.push_back(number);
-	}
-	return PrimaryVector;
-}
+std::optional<vector<double>> ReadingVector(std::istream& input);
 
-void FindingMinMax(vector<float>& Vector, vector<float>::iterator& MaxIter, vector<float>::iterator& MinIter)
-{
-	MaxIter = std::max_element(Vector.begin(), Vector.end());
-	MinIter = std::min_element(Vector.begin(), Vector.end());	
-}
+std::optional<ExtremeElements> FindingMinMax(vector<double>& Vector);
+
+void MultiplicationByMaximumAndDivisionByMinimum(vector<double>& vector, double max, double min);
+
+void SortVectorInAscendingOrder(std::vector<double>& vector);
+
+void PrintVector(std::ostream& output, const std::vector<double>& vector);
