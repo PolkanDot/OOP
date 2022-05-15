@@ -1,0 +1,9 @@
+cat;кошка
+man;человек
+book;книга
+music;музыка
+dictionary;словарь
+sea;море
+red square;красная площадь
+black sea;черное море
+some-body;кто-нибудь
