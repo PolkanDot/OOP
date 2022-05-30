@@ -362,3 +362,4 @@ MigrationBackup/
 /1lab/ReplaceProject/test_input_output/big_input.txt
 /1lab/ReplaceProject/test_input_output/*.txt
 /3lab/CryptProject/CryptFiles
+/4lab/VectorProject/test_text
