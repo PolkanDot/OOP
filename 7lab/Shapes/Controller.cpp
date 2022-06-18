@@ -97,34 +97,22 @@ void Controller::Starting(istream& const inputStream, ostream& outputStream)
 
 std::shared_ptr<IShape> Controller::FindMinPerimeterShape() const
 {
-	std::shared_ptr<IShape> minPerimeterShape = shapes[0];
-	double minPerimeter = shapes[0]->GetPerimeter();
-	double perimeter;
-	for (size_t i = 1; i < shapes.size(); i++)
-	{
-		if ((perimeter = shapes[i]->GetPerimeter()) < minPerimeter)
-		{
-			minPerimeter = perimeter;
-			minPerimeterShape = shapes[i];
-		}
-	}
-	return minPerimeterShape;
+	auto minPerimeterShapePtr = std::min_element(shapes.begin(), shapes.end(),
+		[](const std::shared_ptr<IShape>& shape1, const std::shared_ptr<IShape>& shape2) {
+			return shape1->GetPerimeter() < shape2->GetPerimeter();
+		});
+
+	return *minPerimeterShapePtr;
 }
 
 std::shared_ptr<IShape> Controller::FindMaxAreaShape() const
 {
-	std::shared_ptr<IShape> maxAreaShape = shapes[0];
-	double maxArea = shapes[0]->GetArea();
-	double area;
-	for (size_t i = 1; i < shapes.size(); i++)
-	{
-		if ((area = shapes[i]->GetArea()) > maxArea)
-		{
-			maxArea = area;
-			maxAreaShape = shapes[i];
-		}
-	}
-	return maxAreaShape;
+	auto maxAreaShapePtr = std::max_element(shapes.begin(), shapes.end(),
+		[](const std::shared_ptr<IShape>& shape1, const std::shared_ptr<IShape>& shape2) {
+			return shape1->GetArea() < shape2->GetArea();
+		});
+
+	return *maxAreaShapePtr;
 }
 
 void Controller::GetInfo(ostream& outputStream, std::shared_ptr<IShape> figura) 

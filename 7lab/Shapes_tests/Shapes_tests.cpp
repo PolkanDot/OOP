@@ -29,6 +29,7 @@ SCENARIO("Checking the correctness of calculating the area of each figure")
 		CPoint pnt1{ 1, 1 }, pnt2{ 3, 1 };
 		CLineSegment lineSegment(pnt1, pnt2, "jgk45g");
 		CHECK(lineSegment.GetArea() == 0);
+		CHECK(lineSegment.GetPerimeter() == 2);
 	}
 }
 
@@ -40,12 +41,25 @@ SCENARIO("Checking the correctness of the perimeter of each figure")
 		CTriangle triangle(pnt1, pnt2, pnt3, "ff55ff", "55ff55");
 		CHECK(round(triangle.GetPerimeter()) == 7.0);
 	}
+	WHEN("Triangle in line")
+	{
+		CPoint pnt1{ 0, 1 }, pnt2{ 0, 2 }, pnt3{ 0, 3 };
+		CTriangle triangle(pnt1, pnt2, pnt3, "ff55ff", "55ff55");
+		CHECK(round(triangle.GetPerimeter()) == 4.0);
+	}
 	WHEN("Rectangle")
 	{
 		CPoint pnt1{ 1, 1 };
 		double height = 10, width = 5;
 		CRectangle rectangle(pnt1, width, height, "55rf55", "88gg88");
 		CHECK(rectangle.GetPerimeter() == 30.0);
+	}
+	WHEN("Rectangle in line")
+	{
+		CPoint pnt1{ 1, 1 };
+		double height = 0, width = 5;
+		CRectangle rectangle(pnt1, width, height, "55rf55", "88gg88");
+		CHECK(rectangle.GetPerimeter() == 10.0);
 	}
 	WHEN("Circle")
 	{
@@ -54,11 +68,24 @@ SCENARIO("Checking the correctness of the perimeter of each figure")
 		CCircle circle(pnt1, radius, "jjgj", "85jg99");
 		CHECK(round(circle.GetPerimeter()) == 63.0);
 	}
+	WHEN("Circle in point")
+	{
+		CPoint pnt1{ 1, 1 };
+		double radius = 0;
+		CCircle circle(pnt1, radius, "jjgj", "85jg99");
+		CHECK(round(circle.GetPerimeter()) == 0.0);
+	}
 	WHEN("Line segment")
 	{
 		CPoint pnt1{ 1, 1 }, pnt2{ 3, 1 };
 		CLineSegment lineSegment(pnt1, pnt2, "jgk45g");
 		CHECK(lineSegment.GetPerimeter() == 2.0);
+	}
+	WHEN("Line segment in point")
+	{
+		CPoint pnt1{ 1, 1 }, pnt2{ 1, 1 };
+		CLineSegment lineSegment(pnt1, pnt2, "jgk45g");
+		CHECK(lineSegment.GetPerimeter() == 0.0);
 	}
 }
 
@@ -356,7 +383,7 @@ SCENARIO("We transmit incorrect data about the circle")
 {
 	Controller controller;
 	ostringstream result;
-	WHEN("Negative radius	")
+	WHEN("Negative radius")
 	{
 		istringstream inputCommands{ "circle 1 1 -4 ff0000 55ff55\n" };
 		controller.Starting(inputCommands, result);

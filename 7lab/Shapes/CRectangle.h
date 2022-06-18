@@ -1,6 +1,6 @@
 #pragma once
 #include "ISolidShape.h"
-#include <exception>
+
 const std::string coord = "Coordinates of the upper left point: ";
 const std::string heightRect = "Rectangle height: ";
 const std::string widthRect = "Rectangle width: ";
@@ -27,6 +27,6 @@ private:
 	CPoint leftTopVertex;
 	double width;
 	double height;
-	std::string  outlineColor;
-	std::string  fillColor;
+	std::string outlineColor;
+	std::string fillColor;
 };

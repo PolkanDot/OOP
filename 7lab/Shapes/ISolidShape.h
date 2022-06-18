@@ -1,7 +1,7 @@
 #pragma once
 #include "IShape.h"
 const std::string wordFill = "Fill color: ";
-
+// Интерфейс для фигур с цветом заливки
 class ISolidShape: public IShape
 {
 public:

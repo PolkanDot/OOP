@@ -6,6 +6,7 @@
 #include "CRectangle.h"
 #include "CCircle.h"
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 

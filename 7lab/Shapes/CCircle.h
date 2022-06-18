@@ -4,6 +4,7 @@
 const std::string radiusCircle = "Circle radius: ";
 const std::string centerCircle = "Coordinates of the center of the circle: ";
 
+// Класс круг
 class CCircle : public ISolidShape
 {
 public:

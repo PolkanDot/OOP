@@ -6,6 +6,7 @@
 const std::string blank = " ";
 const std::string newLn = "\n";
 
+// Интерфейс фигур без цвета закраски
 class IShape
 {
 public:
